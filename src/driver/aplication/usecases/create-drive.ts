@@ -15,6 +15,11 @@ export namespace CreateDrive {
     export type Output = DriverDtoOutput
 
     export class CreateDriveUseCase implements UseCase<Input, Output> {
+
+        constructor(
+            private driveRepository : DriverRepository.Repository
+            hashProvaider: string
+        ){}
         execute(input: Input): Promise<Output> {
             throw new Error("Method not implemented.");
         }
