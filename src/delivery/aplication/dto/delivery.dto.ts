@@ -1,12 +1,12 @@
 import { DeliveryEntity } from "../../domain/entities/delivery.entity.js"
-import { DeliveryStatus } from "../../domain/enum/delivery-status.enum.js"
+import { DeliveryStatus } from "../../domain/enum/elivery-status.enum.js"
 
 
 export type DeliveryOutput = {
     id: string
     status: DeliveryStatus
     createdAt: Date
-    driverId: string
+    driverId: string | null
 } 
 
 export class DeliveryOutputMapper {

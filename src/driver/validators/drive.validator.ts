@@ -1,6 +1,6 @@
-import { IsBoolean, IsNotEmpty, IsString, MinLength } from "class-validator"
-import { DriverProps } from "../domain/entities/driver.entity.js"
+import { IsBoolean, IsDate, IsNotEmpty, IsOptional, IsString, MinLength } from "class-validator"
 import { ClassValidatorFields } from "../../shared/validator/class-validator-filds.js"
+import { DriverProps } from "../domain/entites/driver.entity.js"
 
 export class DriveValidatorRules  {
     
@@ -14,15 +14,19 @@ export class DriveValidatorRules  {
 
 
     @IsBoolean()
-    vehicle: boolean
+    authorized: boolean
     
     @IsString()
     @MinLength(8)
     @IsNotEmpty()
     password: string
 
-    constructor({name, email}: DriverProps ){
-        Object.assign(this, {email, name})
+    @IsOptional()
+    @IsDate()
+    createdAt?: Date
+
+    constructor({name, email, authorized, password, createdAt}: DriverProps){
+        Object.assign(this, {email, name, authorized, password, createdAt})
     }
 }
 

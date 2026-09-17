@@ -1,5 +1,5 @@
 import { Entity } from "../../../shared/domain/entites/entity.js"
-import { DeliveryStatus } from "../enum/delivery-status.enum.js"
+import { DeliveryStatus } from "../enum/elivery-status.enum.js"
 
 
 export type DeliveryProps = {

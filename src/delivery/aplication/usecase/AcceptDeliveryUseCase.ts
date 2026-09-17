@@ -1,6 +1,6 @@
 import { HttpException, HttpStatus } from "@nestjs/common"
 import { UseCase } from "../../../shared/aplication/usecase/use-case.js"
-import { DeliveryStatus } from "../../domain/enum/delivery-status.enum.js"
+import { DeliveryStatus } from "../../domain/enum/elivery-status.enum.js"
 import { DeliveryRepository } from "../../domain/repository/delivery-repository.js"
 import { DeliveryOutput, DeliveryOutputMapper } from "../dto/delivery.dto.js"
 
