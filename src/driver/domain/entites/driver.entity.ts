@@ -4,7 +4,7 @@ import { DriveValidatorFactory } from "../../validators/drive.validator.js"
 export class DriverProps {
     name: string
     email: string
-    authorized: boolean
+    authorized?: boolean
     password: string
     createdAt?: Date
 }
@@ -55,15 +55,6 @@ export class DriverEntity extends Entity<DriverProps> {
 
     private set email(value: string) {
         this.props.email = value
-
-    }
-
-    get authorized() {
-        return this.props.authorized
-    }
-
-    private set authorized(value: boolean) {
-        this.props.authorized = value
 
     }
 

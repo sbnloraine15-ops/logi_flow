@@ -1,7 +1,8 @@
+import { HashProvider } from "../../../shared/aplication/providers/hash-provider.js";
 import { UseCase } from "../../../shared/aplication/usecase/use-case.js";
 import { DriverEntity } from "../../domain/entites/driver.entity.js";
 import { DriverRepository } from "../../domain/repository/driver-repository.js";
-import { DriverDtoOutput } from "../dto/drive.dto.js";
+import { DiverOutputMapper, DriverDtoOutput } from "../dto/drive.dto.js";
 
 export namespace CreateDrive {
     export type Input = {
@@ -17,11 +18,22 @@ export namespace CreateDrive {
     export class CreateDriveUseCase implements UseCase<Input, Output> {
 
         constructor(
-            private driveRepository : DriverRepository.Repository
-            hashProvaider: string
+            private driveRepository : DriverRepository.Repository, 
+            private hashProvaider: HashProvider
         ){}
-        execute(input: Input): Promise<Output> {
-            throw new Error("Method not implemented.");
+        async execute(input: Input): Promise<Output> {
+            const {email, name, password} = input 
+
+            if(!email || !name || !password ){
+                throw new Error('Input data not provided')    
+            }
+            const hashPassword = await this.hashProvaider.generateHash(password)
+
+            const entity = new DriverEntity(
+                Object.assign(input, {password: hashPassword})
+            )
+            await this.driveRepository.insert(entity)
+            return DiverOutputMapper.toOutput(entity)
         }
 
     }

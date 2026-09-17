@@ -12,9 +12,9 @@ export class DriveValidatorRules  {
     @IsNotEmpty()
     email: string
 
-
+    @IsOptional()
     @IsBoolean()
-    authorized: boolean
+    authorized?: boolean
     
     @IsString()
     @MinLength(8)
