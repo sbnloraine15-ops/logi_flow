@@ -1,16 +1,10 @@
-import { IsNotEmpty, IsString } from "class-validator";
-import { UpdateDelivery } from "../../aplication/usecase/update-delivery.js";
-import { DeliveryStatus } from "../../domain/enum/elivery-status.enum.js";
+import { IsNotEmpty, IsOptional, IsString } from "class-validator";
+import { UpdateDelivery } from "../../aplication/usecase/AcceptDeliveryUseCase.js";
+import { DeliveryStatus } from "../../domain/enum/delivery-status.enum.js";
 
 
-export class UpdateDeliveryDto implements UpdateDelivery.Input {
-
+export class UpdateDeliveryDto {
+    @IsOptional()
     @IsString()
-    @IsNotEmpty()
-    id: string;
-
-    @IsString()
-    @IsNotEmpty()
-    status: DeliveryStatus;
-
+    driverId: string;
 }

@@ -1,5 +1,5 @@
 import { DeliveryEntity } from "../../domain/entities/delivery.entity.js"
-import { DeliveryStatus } from "../../domain/enum/elivery-status.enum.js"
+import { DeliveryStatus } from "../../domain/enum/delivery-status.enum.js"
 
 
 export type DeliveryOutput = {

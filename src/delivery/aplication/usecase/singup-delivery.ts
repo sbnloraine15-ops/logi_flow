@@ -1,7 +1,7 @@
 import { UseCase } from "../../../shared/aplication/usecase/use-case.js";
 import { RepositoryInterface } from "../../../shared/domain/repositories/repository-contracts.js";
 import { DeliveryEntity } from "../../domain/entities/delivery.entity.js";
-import { DeliveryStatus } from "../../domain/enum/elivery-status.enum.js";
+import { DeliveryStatus } from "../../domain/enum/delivery-status.enum.js";
 
 export namespace CreateDelivery {
     export type Input = {
@@ -12,7 +12,7 @@ export namespace CreateDelivery {
     export type Output = {
         status: DeliveryStatus;
         id: string;
-        driverId: string;
+        driverId: string | null
     }
 
     export class DeliveryCreateUseCase implements UseCase<Input, Output> {
