@@ -1,13 +1,10 @@
 import { UseCase } from "../../../shared/aplication/usecase/use-case.js"
 import { DriverRepository } from "../../domain/repository/driver-repository.js"
-import { DriverDtoOutput } from "../dto/drive.dto.js"
+import { DiverOutputMapper, DriverDtoOutput } from "../dto/drive.dto.js"
 
 export namespace GetDriver {
     export type Input = {
         id: string
-        name: string
-        email: string
-        authorized?: boolean
     }
 
     export type Output = DriverDtoOutput
@@ -18,7 +15,7 @@ export namespace GetDriver {
         async execute(input: Input): Promise<Output> {
                 const entity = await this.driverRepository.findById(input.id)
 
-            return 
+            return DiverOutputMapper.toOutput(entity)
         }
 }
 }

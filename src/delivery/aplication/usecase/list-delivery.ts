@@ -10,7 +10,7 @@ export namespace ListDelivery {
         id: string
         status: DeliveryStatus
         createdAt: Date
-        driverId: string
+        driverId: string | null
     }[] //precisei pesquisar
 
     export class DeliveryListUseCase implements UseCase<Input, Output> {

@@ -3,7 +3,7 @@ import { UpdateDelivery } from "../../aplication/usecase/AcceptDeliveryUseCase.j
 import { DeliveryStatus } from "../../domain/enum/elivery-status.enum.js";
 
 
-export class UpdateDeliveryDto {
+export class UpdateDeliveryDto implements Omit< UpdateDelivery.Input, 'id'> {
     @IsOptional()
     @IsString()
     driverId: string;

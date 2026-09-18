@@ -1,9 +1,15 @@
 import { Module } from '@nestjs/common';
-import { DeliveryService } from './delivery.service';
-import { DeliveryController } from './delivery.controller';
+import { DeliveryController } from './infrestructure/delivery.controller.js';
+import { CreateDelivery } from './aplication/usecase/singup-delivery.js';
+
+
 
 @Module({
   controllers: [DeliveryController],
-  providers: [DeliveryService],
+  providers: [
+    {
+      provaide: ''
+    }
+  ],
 })
 export class DeliveryModule {}
