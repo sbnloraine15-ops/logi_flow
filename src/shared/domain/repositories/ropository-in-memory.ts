@@ -2,6 +2,7 @@ import { HttpException, HttpStatus } from "@nestjs/common";
 import { Entity } from "../entites/entity.js";
 import { RepositoryInterface } from "./repository-contracts.js";
 
+
 export class RepositoryInMemory<E extends Entity>
     implements RepositoryInterface<E> {
 

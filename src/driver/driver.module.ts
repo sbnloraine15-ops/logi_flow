@@ -8,6 +8,9 @@ import { Bcryptjs } from './infrastructure/hash-provaider/bycryptyjs.js';
 import { GetDriver } from './aplication/usecases/get-drive.js';
 import { UpdateDriver } from './aplication/usecases/update-drive.js';
 import { DeleteDriver } from './aplication/usecases/delete-drive.js';
+import { PrismaService } from '../shared/infrestucture/database/prima-service.js';
+import { DriverPrismaRepository } from './infrastructure/repository/driver-prisma.repository.js';
+
 
 
 @Module({
@@ -15,8 +18,9 @@ import { DeleteDriver } from './aplication/usecases/delete-drive.js';
   providers: [
     {
       provide: 'DriverRepository',
-      useClass: DriverRepositoryInMemory
+      useClass: DriverPrismaRepository,
     },
+    PrismaService,
     {
       provide: 'HashProvider',
       useClass: Bcryptjs,

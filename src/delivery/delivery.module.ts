@@ -7,6 +7,8 @@ import { UpdateDelivery } from './aplication/usecase/AcceptDeliveryUseCase.js';
 import { ListDelivery } from './aplication/usecase/list-delivery.js';
 import { DeliveryDelete } from './aplication/usecase/delete-delivery.js';
 import { DeliveryRepositoryInMemory } from './infrestructure/repository/delivery-repository-in-memory.js';
+import { DeliveryPrismaRepository } from './infrestructure/repository/delivery-prisma.repository.js';
+import { PrismaService } from '../shared/infrestucture/database/prima-service.js';
 
 
 
@@ -16,8 +18,9 @@ import { DeliveryRepositoryInMemory } from './infrestructure/repository/delivery
   providers: [
     {
       provide: 'DeliveryRepository',
-      useClass: DeliveryRepositoryInMemory,
+      useClass: DeliveryPrismaRepository,
     },
+    PrismaService, 
     {
       provide: CreateDelivery.DeliveryCreateUseCase,
       useFactory: (
