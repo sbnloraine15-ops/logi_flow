@@ -10,19 +10,21 @@ export type DeliveryProps = {
 
 export class DeliveryEntity extends Entity<DeliveryProps> {
     constructor(
-        public readonly props: DeliveryProps, id?: string) {
+        props: DeliveryProps,
+        id?: string,
+    ) {
         super(
             {
                 ...props,
                 status: props.status ?? DeliveryStatus.PENDING,
                 createdAt: props.createdAt ?? new Date(),
-            }, id
-        )
-
+            },
+            id,
+        );
     }
 
 
-     
+
     get status(): DeliveryStatus {
         return this.props.status
     }
@@ -37,16 +39,16 @@ export class DeliveryEntity extends Entity<DeliveryProps> {
 
 
     public startDelivery(driverId: string): void {
-        if (this.props.status !== DeliveryStatus.PENDING){
+        if (this.props.status !== DeliveryStatus.PENDING) {
             throw new Error('Apenas entregas pendentes podem ser iniciadas')
-        } 
+        }
         this.props.driverId = driverId
         this.props.status = DeliveryStatus.IN_PROGRESS
 
     }
 
     public completdDelivery(): void {
-        if(this.props.status !== DeliveryStatus.IN_PROGRESS){
+        if (this.props.status !== DeliveryStatus.IN_PROGRESS) {
             throw new Error('Apenas entregas iniciadas podem ser concluidas')
         }
 
@@ -54,7 +56,7 @@ export class DeliveryEntity extends Entity<DeliveryProps> {
     }
 
     public completedDelivery(): void {
-        if(this.props.status !== DeliveryStatus.DELIVERED){
+        if (this.props.status !== DeliveryStatus.DELIVERED) {
             throw new Error('Apenas entregas iniciadas podem ser canceladas')
         }
 
