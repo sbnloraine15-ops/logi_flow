@@ -6,6 +6,7 @@ import { UpdateDelivery } from '../aplication/usecase/AcceptDeliveryUseCase.js';
 import { ListDelivery } from '../aplication/usecase/list-delivery.js';
 import { UpdateDeliveryDto } from './dto/update-delivery.dto.js';
 import { SingupDto } from './dto/singup.dto.js';
+import { AuthService } from '../../auth/infrastructure/auth.service.js';
 
 
 
@@ -27,12 +28,21 @@ export class DeliveryController {
   @Inject(ListDelivery.DeliveryListUseCase)
   private listDelivery : ListDelivery.DeliveryListUseCase
 
+  @Inject()
+  private authService : AuthService
+
   
 
   @HttpCode(201)
   @Post()
   async create(@Body() createDeliveryDto: SingupDto) {
-    return await this.createDelivery.execute(createDeliveryDto)
+    const output = await this.createDelivery.execute(createDeliveryDto)
+    const deliveryVerify = output.driverId  
+    console.log(deliveryVerify)
+    if (deliveryVerify != null){
+      return this.authService.verifyJwt(deliveryVerify)
+    }
+    return output
   }
 
   @Get()
@@ -56,3 +66,5 @@ export class DeliveryController {
     return this.deleteDelivery.execute({id});
   }
 }
+
+//se tiver driver.id ele vai verificar 

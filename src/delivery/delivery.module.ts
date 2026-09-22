@@ -6,21 +6,22 @@ import { GetDelivery } from './aplication/usecase/get-delivery.js';
 import { UpdateDelivery } from './aplication/usecase/AcceptDeliveryUseCase.js';
 import { ListDelivery } from './aplication/usecase/list-delivery.js';
 import { DeliveryDelete } from './aplication/usecase/delete-delivery.js';
-import { DeliveryRepositoryInMemory } from './infrestructure/repository/delivery-repository-in-memory.js';
 import { DeliveryPrismaRepository } from './infrestructure/repository/delivery-prisma.repository.js';
 import { PrismaService } from '../shared/infrestucture/database/prima-service.js';
+import { AuthModule } from '../auth/infrastructure/auth.module.js';
 
 
 
 
 @Module({
+  imports: [AuthModule],
   controllers: [DeliveryController],
   providers: [
     {
       provide: 'DeliveryRepository',
       useClass: DeliveryPrismaRepository,
     },
-    PrismaService, 
+    PrismaService,
     {
       provide: CreateDelivery.DeliveryCreateUseCase,
       useFactory: (
@@ -37,6 +38,7 @@ import { PrismaService } from '../shared/infrestucture/database/prima-service.js
       useFactory: (
         deliveryRepository: DeliveryRepository.Repository
       ) => {
+
         return new GetDelivery.GetDeliveryUseCase(
           deliveryRepository,
         )
