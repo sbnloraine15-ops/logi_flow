@@ -1,6 +1,7 @@
 import { DriverEntity } from "../../domain/entites/driver.entity.js"
 
 export type DriverDtoOutput = {
+    id: string
     name: string
     email: string
     authorized: boolean

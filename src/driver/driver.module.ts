@@ -10,10 +10,12 @@ import { UpdateDriver } from './aplication/usecases/update-drive.js';
 import { DeleteDriver } from './aplication/usecases/delete-drive.js';
 import { PrismaService } from '../shared/infrestucture/database/prima-service.js';
 import { DriverPrismaRepository } from './infrastructure/repository/driver-prisma.repository.js';
+import { AuthModule } from '../auth/infrastructure/auth.module.js';
 
 
 
 @Module({
+  imports: [AuthModule],
   controllers: [DriverController],
   providers: [
     {

@@ -6,25 +6,32 @@ import { GetDriver } from './aplication/usecases/get-drive.js';
 import { CreateDriverDto } from './infrastructure/dto/create-usecase.dto.js';
 import { UpdateDriverDto } from './infrastructure/dto/update-usecase.dto.js';
 import { UpdateDriver } from './aplication/usecases/update-drive.js';
+import { inject } from 'vitest';
+import { AuthService } from '../auth/infrastructure/auth.service.js';
 
 @Controller('driver')
 export class DriverController {
-  
-  @Inject()
-  private createDrive : CreateDrive.CreateDriveUseCase
 
   @Inject()
-  private deleteDrive : DeleteDriver.DeleteDriverUseCase
-  
-  @Inject()
-  private updateDrive : UpdateDriver.UpdateDriverUseCase 
+  private createDrive: CreateDrive.CreateDriveUseCase
 
   @Inject()
-  private getDrive : GetDriver.GetDriverUseCase
+  private deleteDrive: DeleteDriver.DeleteDriverUseCase
+
+  @Inject()
+  private updateDrive: UpdateDriver.UpdateDriverUseCase
+
+  @Inject()
+  private getDrive: GetDriver.GetDriverUseCase
+
+  @Inject()
+  private authService: AuthService
+
 
   @Post()
   async create(@Body() createDriverDto: CreateDriverDto) {
-    return await this.createDrive.execute(createDriverDto);
+    const output = await this.createDrive.execute(createDriverDto)
+    return this.authService.generateJwt(output.id)
   }
 
   // @Get()
@@ -34,19 +41,19 @@ export class DriverController {
 
   @Get(':id')
   async findOne(@Param('id') id: string) {
-    return await this.getDrive.execute({id});
+    return await this.getDrive.execute({ id });
   }
 
   @Patch(':id')
   async update(@Param('id') id: string, @Body() updateDriverDto: UpdateDriverDto) {
-      return await this.updateDrive.execute({
-        id, 
-        ...updateDriverDto
-      })
+    return await this.updateDrive.execute({
+      id,
+      ...updateDriverDto
+    })
   }
 
   @Delete(':id')
   async remove(@Param('id') id: string) {
-    return await this.deleteDrive.execute({id});
+    return await this.deleteDrive.execute({ id });
   }
 }
