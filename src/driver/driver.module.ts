@@ -11,6 +11,7 @@ import { DeleteDriver } from './aplication/usecases/delete-drive.js';
 import { PrismaService } from '../shared/infrestucture/database/prima-service.js';
 import { DriverPrismaRepository } from './infrastructure/repository/driver-prisma.repository.js';
 import { AuthModule } from '../auth/infrastructure/auth.module.js';
+import { OptionalJwtAuthGuard } from '../auth/guards/jwt-guards.js';
 
 
 

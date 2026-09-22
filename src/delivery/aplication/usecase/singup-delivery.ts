@@ -5,7 +5,7 @@ import { DeliveryStatus } from "../../domain/enum/elivery-status.enum.js";
 
 export namespace CreateDelivery {
     export type Input = {
-        driverId: string;
+        driverId?: string;
     }
 
     export type Output = {
@@ -20,7 +20,7 @@ export namespace CreateDelivery {
         async execute(input: Input): Promise<Output> {  
             const delivery = new DeliveryEntity({
                 status: DeliveryStatus.PENDING,
-                driverId: input.driverId, 
+                driverId: input.driverId ?? null,
                 createdAt: new Date()
             });
 

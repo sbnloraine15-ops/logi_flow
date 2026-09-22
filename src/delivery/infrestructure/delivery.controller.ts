@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, HttpCode, Inject } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, HttpCode, Inject, UseGuards } from '@nestjs/common';
 import { CreateDelivery } from '../aplication/usecase/singup-delivery.js';
 import { GetDelivery } from '../aplication/usecase/get-delivery.js';
 import { DeliveryDelete } from '../aplication/usecase/delete-delivery.js';
@@ -7,6 +7,8 @@ import { ListDelivery } from '../aplication/usecase/list-delivery.js';
 import { UpdateDeliveryDto } from './dto/update-delivery.dto.js';
 import { SingupDto } from './dto/singup.dto.js';
 import { AuthService } from '../../auth/infrastructure/auth.service.js';
+import { DecoratorDriver } from '../../auth/guards/decorator-jwt.js';
+import { OptionalJwtAuthGuard } from '../../auth/guards/jwt-guards.js';
 
 
 
@@ -32,16 +34,14 @@ export class DeliveryController {
   private authService : AuthService
 
   
-
+  @UseGuards(OptionalJwtAuthGuard)
   @HttpCode(201)
   @Post()
-  async create(@Body() createDeliveryDto: SingupDto) {
-    const output = await this.createDelivery.execute(createDeliveryDto)
-    const deliveryVerify = output.driverId  
-    console.log(deliveryVerify)
-    if (deliveryVerify != null){
-      return this.authService.verifyJwt(deliveryVerify)
-    }
+  async create(@Body() createDeliveryDto: SingupDto, @DecoratorDriver() driverId?: string) {
+    const output = await this.createDelivery.execute({
+      ...createDeliveryDto, 
+      driverId
+    })
     return output
   }
 

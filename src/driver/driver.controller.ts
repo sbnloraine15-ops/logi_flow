@@ -1,12 +1,10 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Inject, HttpCode } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Inject, HttpCode, UseGuards } from '@nestjs/common';
 import { CreateDrive } from './aplication/usecases/create-drive.js';
 import { DeleteDriver } from './aplication/usecases/delete-drive.js';
-import { UpdateDelivery } from '../delivery/aplication/usecase/AcceptDeliveryUseCase.js';
 import { GetDriver } from './aplication/usecases/get-drive.js';
 import { CreateDriverDto } from './infrastructure/dto/create-usecase.dto.js';
 import { UpdateDriverDto } from './infrastructure/dto/update-usecase.dto.js';
 import { UpdateDriver } from './aplication/usecases/update-drive.js';
-import { inject } from 'vitest';
 import { AuthService } from '../auth/infrastructure/auth.service.js';
 
 @Controller('driver')
@@ -29,7 +27,7 @@ export class DriverController {
 
   @HttpCode(201)
   @Post()
-  async create(@Body() createDriverDto: CreateDriverDto, @Headers('authorization') authHearder: string) {
+  async create(@Body() createDriverDto: CreateDriverDto) {
     const output = await this.createDrive.execute(createDriverDto)
     console.log(output.id)
     const token = this.authService.generateJwt(output.id)
