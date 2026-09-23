@@ -1,0 +1,94 @@
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  font-family: Arial, sans-serif;
+  /* Apenas uma sugestão para melhorar a fonte */
+}
+
+
+/* O container principal ocupa a tela toda e centraliza o quadrado no meio */
+.container {
+  background-color: rgb(32, 191, 163, 0.8);
+  ;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* O quadrado central dividido meio a meio */
+.container-principal {
+  display: flex;
+  width: 85vw;
+  max-width: 1000px;
+  height: 80vh;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0.05, 0, 0.1);
+  overflow: hidden;
+}
+
+/* Dividindo o espaço meio a meio (50% para cada) */
+.logo,
+.login {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 2rem;
+  box-sizing: border-box;
+}
+
+/* Estilo opcional para diferenciar o lado da imagem/logo */
+.logo {
+  background-color: #f4f4f4;
+  /* Apenas para teste, substitua pela sua imagem */
+  align-items: center;
+}
+
+
+.login {
+  background-color: #ffffff;
+}
+
+/* Ajustes para os inputs não estourarem o tamanho */
+.input-dados {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+.input-dados input {
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.btn {
+  background-color: rgb(32, 191, 163, 0.5);
+
+}
+
+.btn,
+.btn-cadastro {
+  width: 100%;
+  padding: 0.7rem;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 10px;
+
+}
+
+.text {
+  font-family: sans-serif;
+  text-align: center;
+  font-weight: 100;
+
+}
